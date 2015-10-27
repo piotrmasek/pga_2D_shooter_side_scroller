@@ -8,7 +8,9 @@ public class Bullet : MonoBehaviour {
     public Player player;
 
 	void Start () {
-        rb.velocity = new Vector2(speed, 0);
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        direction.Normalize();
+        rb.velocity = direction * speed;
 	}
 	
 	void Update () {
