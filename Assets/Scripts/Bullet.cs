@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour {
 
     public Rigidbody2D rb;
     public float speed = 10;
+    public float range = 250;
     public Player player;
 
 	void Start () {
@@ -13,9 +14,16 @@ public class Bullet : MonoBehaviour {
         rb.velocity = direction * speed;
 	}
 	
-	void Update () {
-	
+	void Update ()
+    {
+	  
 	}
+
+    void FixedUpdate()
+    {
+        if ((player.transform.position - this.transform.position).magnitude > range)
+            Destroy(gameObject);
+    }
 	
     void OnCollisionEnter2D(Collision2D coll) {
         Destroy(gameObject);
