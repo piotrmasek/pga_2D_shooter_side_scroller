@@ -870,6 +870,7 @@ GameObject:
   - 61: {fileID: 1189864073}
   - 114: {fileID: 1189864074}
   - 114: {fileID: 1189864075}
+  - 95: {fileID: 1189864072}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -909,7 +910,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1189864066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -2.18244095e-05, w: 1}
   m_LocalPosition: {x: -38.0850983, y: -3.87470651, z: 0}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
@@ -957,9 +958,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1189864066}
   speed: 100
-  force: 1500
+  force: 1700
   rb: {fileID: 1189864069}
+  m_Animator: {fileID: 1189864072}
   grounded: 0
+--- !u!95 &1189864072
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189864066}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dd8419bf0db28ab478a6418d1fb8ac26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!61 &1189864073
 BoxCollider2D:
   m_ObjectHideFlags: 0

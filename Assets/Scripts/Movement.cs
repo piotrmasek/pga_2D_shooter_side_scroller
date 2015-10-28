@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Movement : MonoBehaviour {
 
@@ -7,6 +6,7 @@ public class Movement : MonoBehaviour {
     public float speed = 1;
     public float force = 10; 
     public Rigidbody2D rb;
+    public Animator m_Animator;
 
     public bool grounded = false;
     
@@ -15,14 +15,20 @@ public class Movement : MonoBehaviour {
 	
 	}
 	
-    void Update() {
+    void Update()
+    {
 
     }
 
 	// Update is called once per frame
 	void FixedUpdate () {
-	    if(Input.GetButton("Horizontal")) {
+
+        m_Animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+
+        if (Input.GetButton("Horizontal")) {
             rb.velocity = new Vector2(Input.GetAxis("Horizontal")*speed*Time.fixedDeltaTime, rb.velocity.y);
+
+            
 
             if(Input.GetAxis("Horizontal") >= 0) {
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
