@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : Singleton<GameController>
 {
     public GameObject m_StartGame;
     public GameObject m_ExitGame;
@@ -8,10 +8,13 @@ public class GameController : MonoBehaviour
 
     private bool m_IsPaused = false;
 
-	// Use this for initialization
+
+    protected GameController() {} //singleton protection
+     
+    // Use this for initialization
 	void Start ()
     {
-        DontDestroyOnLoad(gameObject);
+        
 	}
 	
 	// Update is called once per frame
