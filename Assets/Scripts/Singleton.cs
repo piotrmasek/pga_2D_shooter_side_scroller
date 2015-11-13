@@ -14,7 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else
         {
             if(FindObjectsOfType<T>().Length > 1)
-                Debug.Log("[Singleton] Something went wrong! Multiple instencaes of " + typeof(T).ToString() + "already exist!");
+                Debug.LogError("[Singleton] Something went wrong! Multiple instencaes of " + typeof(T).ToString() + "already exist!");
 
             Instance = (T)FindObjectOfType<T>();
 	        DontDestroyOnLoad(gameObject);
