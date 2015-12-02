@@ -16,10 +16,13 @@ public class Destroyable : MonoBehaviour {
             //player.score++;
         //}
 
-        if(bullet != null) { // STRZELA
+        if(bullet != null)
+        {
             bullet.player.score++;
-            Destroy(gameObject);
-            
+
+            life--;
+            if(life <= 0)
+                Destroy(gameObject);   
         }
     }
 }
