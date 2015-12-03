@@ -8,8 +8,8 @@ public class Player : MonoBehaviour {
     public GameObject bullet;
     
     public int score = 0;
-    public int health = 5;
-    public int maxHealth = 5;
+    public float health = 5;
+    public float maxHealth = 5;
     private Text scoreText;
     private Text livesText;
     private Image hpBar;
@@ -34,34 +34,28 @@ public class Player : MonoBehaviour {
 
         scoreText.text = "Score: " + score.ToString();
         livesText.text = "Lives: " + health.ToString() + "/" + maxHealth;
-        UpdateHpBar();
 
-        
+        UpdateHpBar();
+        if (health <= 0)
+        {
+            Die();
+        }
+
+
     }
 
     private void UpdateHpBar()
     {
-        if((float)health/maxHealth > 0.2)
-        {
-            hpBar.color = Color.green;
-        }
-        else
-        {
-            hpBar.color = Color.red;
-        }
-        hpBar.rectTransform.localScale = new Vector3((float)health / maxHealth, 1, 1);
+        float ratio = health / maxHealth;
+        hpBar.color = new Color(1 - ratio, ratio, 0);
+
+        hpBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
 
     }
 
     public void TakeHealth(int hp_to_take)
     {
         health -= hp_to_take;
-        
-
-        if (health <=0)
-        {
-            Die();
-        }
     }
 
     public void Die()
