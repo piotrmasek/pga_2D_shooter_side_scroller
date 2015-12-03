@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
         livesText.text = "Lives: " + health.ToString() + "/" + maxHealth;
         UpdateHpBar();
 
-
+        
     }
 
     private void UpdateHpBar()
