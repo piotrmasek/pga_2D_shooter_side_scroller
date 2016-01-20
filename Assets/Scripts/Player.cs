@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Singleton<Player>
+{
 
     public bool lockScreen = false;
     public GameObject bullet;
@@ -13,6 +15,8 @@ public class Player : MonoBehaviour {
     private Text scoreText;
     private Text livesText;
     private Image hpBar;
+
+
 
     // Use this for initialization
     void Start ()
@@ -25,23 +29,36 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Input.GetButtonDown("Fire1")) {
+	    if(Input.GetButtonDown("Fire1"))
+        {
             GameObject go = Instantiate(bullet, 
                                 transform.position,
                                 Quaternion.identity) as GameObject;
-            go.GetComponent<Bullet>().player = this;
+            go.GetComponent<Bullet>().origin = gameObject;
+            go.GetComponent<Bullet>().target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        scoreText.text = "Score: " + score.ToString();
-        livesText.text = "Lives: " + health.ToString() + "/" + maxHealth;
+       // scoreText.text = "Score: " + score.ToString();
+      //  livesText.text = "Lives: " + health.ToString() + "/" + maxHealth;
 
-        UpdateHpBar();
+       // UpdateHpBar();
         if (health <= 0)
         {
             Die();
         }
 
 
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        if(level > 0)
+        {
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
+            if (spawnPoint)
+                Debug.Log("spawnPoint initialized!");
+        }
     }
 
     private void UpdateHpBar()
@@ -61,6 +78,8 @@ public class Player : MonoBehaviour {
     public void Die()
     {
         Application.LoadLevel(Application.loadedLevel);
+        //SceneManager.LoadScene(SceneManager.c)
+        
         health = 5;
     }
 

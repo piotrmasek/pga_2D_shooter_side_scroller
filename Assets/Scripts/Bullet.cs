@@ -6,12 +6,12 @@ public class Bullet : MonoBehaviour {
     public Rigidbody2D rb;
     public float speed = 10;
     public float range = 250;
-    public Player player;
+    public Vector3 target;
+    public GameObject origin;
+
 
 	void Start () {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        direction.Normalize();
-        rb.velocity = direction * speed;
+        
 	}
 	
 	void Update ()
@@ -21,11 +21,27 @@ public class Bullet : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if ((player.transform.position - this.transform.position).magnitude > range)
+        if ((origin.transform.position - transform.position).magnitude > range)
+        {
             Destroy(gameObject);
+            return;
+        }
+        Vector2 direction = target - transform.position;      
+        rb.velocity = direction.normalized * speed;
     }
-	
-    void OnCollisionEnter2D(Collision2D coll) {
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+
+        if (coll.gameObject == origin)
+            return;
+
+        Player player = coll.gameObject.GetComponent<Player>();
+        if (player)
+        {
+            player.TakeHealth(1);
+        }
+
         Destroy(gameObject);
     }
 }

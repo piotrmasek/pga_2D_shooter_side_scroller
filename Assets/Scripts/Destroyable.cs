@@ -56,10 +56,16 @@ public class Destroyable : MonoBehaviour {
 
         if(bullet != null)
         {
-            bullet.player.score++;
+            Player player = bullet.origin.GetComponent<Player>();
+            if (player)
+            {
+                player.score++;
+            }
 
-            health--;
-                 
+            if(bullet.origin != gameObject)
+            {
+                health--;
+            }
         }
     }
 }
